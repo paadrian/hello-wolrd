@@ -16,14 +16,21 @@ namespace HelloWorld.Tests
         [Fact()]
         public void SayHello_ShouldWriteGreetingsIn4Language_Always()
         {
-            var stringBuilder = new StringBuilder();
-            SystemUnderTest _systemUnderTest = new((text) => stringBuilder.AppendLine(text));
+			// arrange
+            var expectedResult = string.Join(Environment.NewLine, "Hello, World!", "Bonjour le monde!",
+                "Buna ziua lume!", "Hallo Welt!", "");
 
-            _systemUnderTest.Invoking(sut => sut.SayHello()).Should().NotThrow();
+            var inMemoryOutput = new StringBuilder();
+			var inMemoryOutputProvider = (string text) => { inMemoryOutput.AppendLine(text); };
 
-            var result = stringBuilder.ToString();
-            result.Should().Be(string.Join(Environment.NewLine, @"Hello, World!", "Bonjour le monde!", 
-                "Buna ziua lume!","Hallo Welt!", ""));
+            var systemUnderTest = new SystemUnderTest(inMemoryOutputProvider);
+			//act
+
+			var sayHello = systemUnderTest.Invoking(sut => sut.SayHello()); 
+
+			// assert
+			sayHello.Should().NotThrow();
+			var result = inMemoryOutput.ToString().Should().Be(expectedResult);
         }
     }
 }
