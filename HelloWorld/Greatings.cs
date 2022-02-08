@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace HelloWorld
 {
-    public class Greatings
-    {
-        private readonly Action<string> _outputProvider;
+	public class Greatings
+	{
+		private readonly Action<string> _outputProvider;
 
-        public Greatings(Action<string> outputProvider)
-        {
-            _outputProvider = outputProvider;
-        }
+		public Greatings(Action<string> outputProvider)
+		{
+			_outputProvider = outputProvider;
+		}
 
-        public void SayHello()
-        {
-            _outputProvider("Hello, World!");
-            _outputProvider("Bonjour le monde!");
-            _outputProvider("Buna ziua lume!");
-            _outputProvider("Hallo Welt!");
-        }
-    }
+		public void SayHello()
+		{
+			_outputProvider("Hello, World!");
+			_outputProvider("Bonjour le monde!");
+			_outputProvider("Buna ziua lume!");
+			_outputProvider("Hallo Welt!");
+		}
+	}
 }
